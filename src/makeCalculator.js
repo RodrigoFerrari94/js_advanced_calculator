@@ -8,9 +8,13 @@ function makeCalculator() {
     result: 0,
 
     operate: function (callback, num) {
-      this.result = callback(this.result, num);
+      if (typeof callback === 'function') {
+        this.result = callback(this.result, num);
 
-      return this;
+        return this;
+      }
+
+      throw new Error('Callback inválido. Deve ser uma função.');
     },
     add: (num1, num2) => num1 + num2,
     subtract: (num1, num2) => num1 - num2,
